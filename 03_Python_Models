@@ -1,0 +1,24 @@
+# ---------------------------------------------------------
+# SYNTHETIC DATA GENERATION
+# ---------------------------------------------------------
+# Set random seed to ensure consistent data generation on every execution.
+np.random.seed(42)
+
+# Generate a dataset of 100 synthetic customer records.
+data = {
+    'id': range(1, 101),
+    'age': np.random.randint(18, 70, 100),
+    'income': np.random.randint(20000, 150000, 100),
+    'home_status': np.random.choice(['RENT', 'OWN', 'MORTGAGE'], 100),
+    'loan_amount': np.random.randint(5000, 80000, 100),
+}
+
+# Convert the dictionary into a Pandas DataFrame.
+df_raw = pd.DataFrame(data)
+
+# Apply business logic: loans exceeding 45% of annual income are classified as high risk (1).
+df_raw['default_status'] = (df_raw['loan_amount'] / df_raw['income'] > 0.45).astype(int)
+
+# Export the raw data file.
+df_raw.to_csv(raw_csv_path, index=False)
+print(f"Data generation complete. File saved to: {raw_csv_path}")
