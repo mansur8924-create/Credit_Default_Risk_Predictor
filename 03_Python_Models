@@ -35,6 +35,35 @@ df_raw.to_csv(powerbi_csv_path, index=False)
 print(f"Processed file saved to: {powerbi_csv_path}")
 
 # ---------------------------------------------------------
+# INTERACTIVE TERMINAL ASSESSMENT
+# ---------------------------------------------------------
+print("\n" + "="*40)
+print("   FINANCIAL RISK ASSESSMENT SYSTEM")
+print("="*40)
+
+# Implement error handling to manage invalid user inputs.
+try:
+    # Collect applicant details via terminal input.
+    u_age = int(input("Enter Applicant Age: "))
+    u_inc = int(input("Enter Annual Income: "))
+    u_loan = int(input("Enter Loan Amount: "))
+    
+    print("Home Status Options: 0=Mortgage, 1=Own, 2=Rent")
+    u_home = int(input("Enter Home Status (0, 1, or 2): "))
+
+    # Feed the inputs into the trained model to generate a prediction.
+    prediction = model.predict([[u_age, u_inc, u_home, u_loan]])
+    
+    # Output the risk decision based on the model's prediction.
+    if prediction[0] == 1:
+        print("\nRESULT: [!] HIGH RISK - APPLICATION DENIED")
+    else:
+        print("\nRESULT: [✔] LOW RISK - APPLICATION APPROVED")
+
+except ValueError as e:
+    print(f"\nInput Error: Only numeric values are permitted. Details: {e}")
+
+# ---------------------------------------------------------
 # MACHINE LEARNING MODEL TRAINING
 # ---------------------------------------------------------
 # Define the features (X) and the target variable (y).
