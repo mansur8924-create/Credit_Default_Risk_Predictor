@@ -33,3 +33,16 @@ df_raw['home_status_encoded'] = le.fit_transform(df_raw['home_status'])
 # Export the processed dataset for dashboard visualization and analysis.
 df_raw.to_csv(powerbi_csv_path, index=False)
 print(f"Processed file saved to: {powerbi_csv_path}")
+
+# ---------------------------------------------------------
+# MACHINE LEARNING MODEL TRAINING
+# ---------------------------------------------------------
+# Define the features (X) and the target variable (y).
+X = df_raw[['age', 'income', 'home_status_encoded', 'loan_amount']]
+y = df_raw['default_status']
+
+# Initialize and train a Random Forest Classifier with 100 trees.
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X, y)
+print("Model training completed successfully.")
+
