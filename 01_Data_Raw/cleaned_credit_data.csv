@@ -1,0 +1,6 @@
+id,age,income,home_status,loan_amount,default_status,home_status_encoded
+1,22,50000,RENT,35000,1,2
+2,35,85000,MORTGAGE,10000,0,0
+3,21,12000,OWN,500,0,1
+4,45,120000,MORTGAGE,50000,1,0
+5,28,40000,RENT,2000,0,2
