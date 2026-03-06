@@ -22,3 +22,14 @@ df_raw['default_status'] = (df_raw['loan_amount'] / df_raw['income'] > 0.45).ast
 # Export the raw data file.
 df_raw.to_csv(raw_csv_path, index=False)
 print(f"Data generation complete. File saved to: {raw_csv_path}")
+
+# ---------------------------------------------------------
+# DATA PREPROCESSING
+# ---------------------------------------------------------
+# Initialize LabelEncoder to convert categorical text (e.g., 'RENT') into numerical values for the model.
+le = LabelEncoder()
+df_raw['home_status_encoded'] = le.fit_transform(df_raw['home_status'])
+
+# Export the processed dataset for dashboard visualization and analysis.
+df_raw.to_csv(powerbi_csv_path, index=False)
+print(f"Processed file saved to: {powerbi_csv_path}")
